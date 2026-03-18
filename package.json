@@ -14,8 +14,12 @@
   "type": "module",
   "devDependencies": {
     "chai": "^6.2.2",
-    "mocha": "^11.7.5",
+    "mocha": "^11.3.0",
     "mochawesome": "^7.1.4",
     "supertest": "^7.2.2"
+  },
+  "overrides": {
+    "diff": "latest",
+    "serialize-javascript": "latest"
   }
 }
