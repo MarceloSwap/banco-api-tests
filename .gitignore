@@ -1,0 +1,16 @@
+# Dependências do Node (OBRIGATÓRIO)
+node_modules/
+mochawesome-report/
+
+# Arquivos de log do npm
+npm-debug.log
+yarn-error.log
+
+# Variáveis de Ambiente (Senhas, Tokens, URLs sensíveis)
+.env
+.env.test
+.env.local
+
+# Arquivos de Sistema Operacional (Windows/Mac)
+.DS_Store
+Thumbs.db
