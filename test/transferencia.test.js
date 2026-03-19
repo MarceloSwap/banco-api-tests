@@ -1,26 +1,14 @@
 
 import { expect } from 'chai';  // Using Expect style
 import request from 'supertest';
-import  'dotenv/config' // para usar o .env
-
-//Para captura o token e usar nos métodos com autenticação
-let authToken;
-before(async () => {
-  const login = await request(process.env.BASE_URL)
-    .post('/login')
-    .set('Content-Type', 'application/json')
-    .send({
-        username: 'marcelo.ferreira',
-        senha: '123456'
-    });
-    //Objetivo capturar o token
-    authToken = login.body.token;
-});
+import 'dotenv/config' // para usar o .env
+import { obterToken } from '../helpers/autenticacao.js';
 
 
 describe('Transferencias', () => {
-    describe('POST /tranferencias', () => {
+    describe('POST /transferencias', () => {
         it('Deve retornar sucesso com 201 quando o valor da transferencia for maior ou igual a 10 reais', async () => {
+            const authToken = await obterToken('marcelo.ferreira', '123456'); //Usando helpers
             const response = await request(process.env.BASE_URL)
                 .post('/transferencias')
                 .set('Content-Type', 'application/json')
@@ -35,6 +23,7 @@ describe('Transferencias', () => {
 
         });
         it('Deve retornar falha com 422 quando o valor da trânsferência for abaixo de 10 reais', async () => {
+            const authToken = await obterToken('marcelo.ferreira', '123456'); //Usando helpers
             const response = await request(process.env.BASE_URL)
                 .post('/transferencias')
                 .set('Content-Type', 'application/json')
