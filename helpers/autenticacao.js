@@ -1,14 +1,15 @@
 import request from 'supertest';
-import  'dotenv/config'
+import 'dotenv/config'
 
-export const obterToken =  async (usuario, senha) => {
+import { createRequire } from 'module'; // Import ferramenta nativa do Node (createRequire) para criar um 'require'
+const require = createRequire(import.meta.url);
+const postLogin = require('../fixtures/postLogin.json'); //captura o json
+
+export const obterToken = async (usuario, senha) => {
+    const boryLogin = { ...postLogin }
     const respostaLogin = await request(process.env.BASE_URL)
         .post('/login')
         .set('Content-Type', 'application/json')
-        .send({
-            'username': usuario,
-            'senha': senha
-        });
-
+        .send(boryLogin);
     return respostaLogin.body.token;
 }
