@@ -7,6 +7,9 @@ const postLogin = require('../fixtures/postLogin.json'); //captura o json
 
 export const obterToken = async (usuario, senha) => {
     const boryLogin = { ...postLogin }
+    boryLogin.usuario = usuario;
+    boryLogin.senha = senha;
+    
     const respostaLogin = await request(process.env.BASE_URL)
         .post('/login')
         .set('Content-Type', 'application/json')
